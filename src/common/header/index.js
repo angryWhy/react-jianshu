@@ -1,8 +1,17 @@
-import React, { memo, useState } from 'react'
+import React, { memo } from 'react'
 import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper } from './style'
 import { CSSTransition } from 'react-transition-group'
+import { changeHeadNoSpread,changeHeadSpread } from './store/actionactors'
+import { useDispatch,useSelector,shallowEqual } from 'react-redux'
 export default memo(function Header() {
-    const [isSpread, setIsSpread] = useState(false)
+    const dispatch = useDispatch();
+    const {isSpread} = useSelector(state=>({isSpread:state.head.isSpread}),shallowEqual)
+    function headShow(){
+        dispatch(changeHeadSpread())
+    }
+    function headNoShow() {
+        dispatch(changeHeadNoSpread())
+    }
     return (
         <HeaderWrapper>
             <Logo/>
@@ -23,8 +32,8 @@ export default memo(function Header() {
                 <SearchWrapper>
                     <CSSTransition in={isSpread} timeout={200} classNames="slide">
                 <NavInput className={isSpread? "focused":""} 
-                          onFocus={e=>setIsSpread(true)}
-                          onBlur={e=>setIsSpread(false)}
+                          onFocus={e=>headShow()}
+                          onBlur={e=>headNoShow()}
                 />
                     </CSSTransition>
                 <span className={isSpread? "focused iconfont icon-fangdajing":"iconfont icon-fangdajing" }></span>

@@ -1,0 +1,37 @@
+{
+  "id": "3125098",
+  "name": "简书",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "13000504",
+      "name": "放大镜",
+      "font_class": "fangdajing",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "518150",
+      "name": "11 关系",
+      "font_class": "11guanxi",
+      "unicode": "e88f",
+      "unicode_decimal": 59535
+    },
+    {
+      "icon_id": "6606726",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "22978044",
+      "name": "指南针",
+      "font_class": "zhinanzhen",
+      "unicode": "e8a1",
+      "unicode_decimal": 59553
+    }
+  ]
+}

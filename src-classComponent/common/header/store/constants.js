@@ -1,0 +1,2 @@
+export const HEAD_IS_SPREAD="HEAD_IS_SPREAD"
+export const HEAD_NO_SPREAD="HEAD_NO_SPREAD"
