@@ -1,17 +1,34 @@
-import React, { memo } from 'react'
-import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper } from './style'
+import React, { memo, useEffect } from 'react'
+import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper,SearchInfo,SearchInfoTitle,SearchInfoSwitch,SearchInfoItem,SearchList } from './style'
 import { CSSTransition } from 'react-transition-group'
-import { changeHeadNoSpread,changeHeadSpread } from './store/actionactors'
+import { changeHeadNoSpread,changeHeadSpread,getList,showTbale,noShowTbale,changePage } from './store/actionactors'
 import { useDispatch,useSelector,shallowEqual } from 'react-redux'
 export default memo(function Header() {
     const dispatch = useDispatch();
-    const {isSpread} = useSelector(state=>({isSpread:state.head.isSpread}),shallowEqual)
+    const {isSpread,headList,mouseIn} = useSelector(state=>({isSpread:state.head.isSpread,headList:state.head.headItemList,mouseIn:state.head.mouseIn}),shallowEqual)
     function headShow(){
+        dispatch(getList())
         dispatch(changeHeadSpread())
     }
     function headNoShow() {
         dispatch(changeHeadNoSpread())
     }
+    function enterTbale() {
+        dispatch(showTbale())
+    }
+    function leaveTbale() {
+        dispatch(noShowTbale())
+    }
+    function changePage() {
+        dispatch(changePage())
+    }
+    // function itemList(headList) {
+        
+    // }
+    // const showItemList=useMemo(() =>itemList(itemList), [headList])
+    useEffect(() => {
+        console.log(headList)
+    }, [headList])
     return (
         <HeaderWrapper>
             <Logo/>
@@ -37,6 +54,21 @@ export default memo(function Header() {
                 />
                     </CSSTransition>
                 <span className={isSpread? "focused iconfont icon-fangdajing":"iconfont icon-fangdajing" }></span>
+                {(isSpread||mouseIn)&&<SearchInfo onMouseEnter={e=>enterTbale()} onMouseLeave={e=>leaveTbale()}>
+                    <SearchInfoTitle>
+                        热门搜索
+                        <SearchInfoSwitch onClick={e=>changePage()}>换一换</SearchInfoSwitch>
+                    </SearchInfoTitle>
+                      <SearchList>
+                          {
+                              headList.map((item,index)=>{
+                                  return(
+                                    <SearchInfoItem key={index}>{item}</SearchInfoItem>
+                                  )
+                              })
+                          }
+                     </SearchList>
+                </SearchInfo>}
                 </SearchWrapper>
             </Nav>
             <Addition>

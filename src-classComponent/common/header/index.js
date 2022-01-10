@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper } from './style'
+import React, {  } from 'react'
+import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper,SearchInfo } from './style'
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux';
 import { changeHeadSpread,changeHeadNoSpread } from './store/actionactors';
@@ -48,6 +48,7 @@ const Header=(props)=> {
                 />
                     </CSSTransition>
                 <span className={props.isSpread? "focused iconfont icon-fangdajing":"iconfont icon-fangdajing" }></span>
+                <SearchInfo></SearchInfo>
                 </SearchWrapper>
             </Nav>
             <Addition>
@@ -60,7 +61,7 @@ const Header=(props)=> {
 // }
 const mapStateToProps=state=>{
     return{
-        isSpread:state.head.isSpread
+        isSpread:state.get("head").get("isSpread")
     }
 }
 const mapDispatchToProps=dispatch=>{

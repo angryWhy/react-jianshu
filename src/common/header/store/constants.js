@@ -1,2 +1,6 @@
 export const HEAD_IS_SPREAD="HEAD_IS_SPREAD"
 export const HEAD_NO_SPREAD="HEAD_NO_SPREAD"
+export const GET_LIST="GET_LIST"
+export const SHOW_TABLE="SHOW_TABLE"
+export const NO_SHJOW_TABLE="NO_SHJOW_TABLE"
+export const CHANGE_PAGE="CHANGE_PAGE"

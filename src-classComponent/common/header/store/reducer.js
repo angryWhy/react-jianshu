@@ -1,13 +1,14 @@
 import * as actionTypes from "./constants"
-const initState={
+import { fromJS } from "immutable"
+const initState=fromJS({
     isSpread:false
-}
+})
 function reducer(state=initState,action) {
     switch (action.type) {
         case actionTypes.HEAD_IS_SPREAD:
-            return{...state,isSpread:false}
+            return state.set("isSpread",true)
         case actionTypes.HEAD_NO_SPREAD:
-            return{...state,isSpread:true}
+            return state.set("isSpread",false)
         default:
             return state;
     }
