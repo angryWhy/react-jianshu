@@ -5,7 +5,7 @@ import { changeHeadNoSpread,changeHeadSpread,getList,showTbale,noShowTbale,chang
 import { useDispatch,useSelector,shallowEqual } from 'react-redux'
 export default memo(function Header() {
     const dispatch = useDispatch();
-    const {isSpread,headList,mouseIn} = useSelector(state=>({isSpread:state.head.isSpread,headList:state.head.headItemList,mouseIn:state.head.mouseIn}),shallowEqual)
+    const {isSpread,headList,mouseIn,page,totalPage} = useSelector(state=>({isSpread:state.head.isSpread,headList:state.head.headItemList,mouseIn:state.head.mouseIn,page:state.head.page,totalPage:state.head.totalPage}),shallowEqual)
     function headShow(){
         dispatch(getList())
         dispatch(changeHeadSpread())
@@ -19,8 +19,19 @@ export default memo(function Header() {
     function leaveTbale() {
         dispatch(noShowTbale())
     }
-    function changePage() {
-        dispatch(changePage())
+    function refresh(page,totalPage) {
+        if(page<totalPage-1){
+            dispatch(changePage(page+1))
+        }else{
+            dispatch(changePage(0))
+        }
+    }
+    function showItem(page,headList){
+        const newList=[]
+        for(let i=page*5;i<(page+1)*5;i++){
+            newList.push(headList[i])
+        }
+        return newList
     }
     // function itemList(headList) {
         
@@ -57,11 +68,11 @@ export default memo(function Header() {
                 {(isSpread||mouseIn)&&<SearchInfo onMouseEnter={e=>enterTbale()} onMouseLeave={e=>leaveTbale()}>
                     <SearchInfoTitle>
                         热门搜索
-                        <SearchInfoSwitch onClick={e=>changePage()}>换一换</SearchInfoSwitch>
+                        <SearchInfoSwitch onClick={e=>refresh(page,totalPage)}>换一换</SearchInfoSwitch>
                     </SearchInfoTitle>
                       <SearchList>
                           {
-                              headList.map((item,index)=>{
+                              showItem(page,headList).map((item,index)=>{
                                   return(
                                     <SearchInfoItem key={index}>{item}</SearchInfoItem>
                                   )

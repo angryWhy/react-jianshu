@@ -19,7 +19,7 @@ function reducer(state=initState,action) {
         case actionTypes.NO_SHJOW_TABLE:
             return{...state,mouseIn:false}
         case actionTypes.CHANGE_PAGE:
-            return{...state,page:action.page}
+            return{...state,page:action.pageNum}
         default:
             return state;
     }
