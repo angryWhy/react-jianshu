@@ -1,13 +1,14 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper,SearchInfo,SearchInfoTitle,SearchInfoSwitch,SearchInfoItem,SearchList } from './style'
 import { CSSTransition } from 'react-transition-group'
 import { changeHeadNoSpread,changeHeadSpread,getList,showTbale,noShowTbale,changePage } from './store/actionactors'
 import { useDispatch,useSelector,shallowEqual } from 'react-redux'
 export default memo(function Header() {
+    const spin = useRef()
     const dispatch = useDispatch();
     const {isSpread,headList,mouseIn,page,totalPage} = useSelector(state=>({isSpread:state.head.isSpread,headList:state.head.headItemList,mouseIn:state.head.mouseIn,page:state.head.page,totalPage:state.head.totalPage}),shallowEqual)
-    function headShow(){
-        dispatch(getList())
+    function headShow(headList){
+        headList.length===0&&dispatch(getList())
         dispatch(changeHeadSpread())
     }
     function headNoShow() {
@@ -19,12 +20,18 @@ export default memo(function Header() {
     function leaveTbale() {
         dispatch(noShowTbale())
     }
-    function refresh(page,totalPage) {
+    function refresh(page,totalPage,spin) {
+        spin.current.classList.add("spin")
+        
+        console.log(spin.current.classList);
         if(page<totalPage-1){
             dispatch(changePage(page+1))
         }else{
             dispatch(changePage(0))
         }
+        setTimeout(() => {
+            spin.current.classList.remove("spin") 
+        }, 500);
     }
     function showItem(page,headList){
         const newList=[]
@@ -60,15 +67,16 @@ export default memo(function Header() {
                 <SearchWrapper>
                     <CSSTransition in={isSpread} timeout={200} classNames="slide">
                 <NavInput className={isSpread? "focused":""} 
-                          onFocus={e=>headShow()}
+                          onFocus={e=>headShow(headList)}
                           onBlur={e=>headNoShow()}
                 />
                     </CSSTransition>
-                <span className={isSpread? "focused iconfont icon-fangdajing":"iconfont icon-fangdajing" }></span>
+                <span className={isSpread? "focused iconfont icon-fangdajing zoom":"iconfont icon-fangdajing zoom" }></span>
                 {(isSpread||mouseIn)&&<SearchInfo onMouseEnter={e=>enterTbale()} onMouseLeave={e=>leaveTbale()}>
                     <SearchInfoTitle>
                         热门搜索
-                        <SearchInfoSwitch onClick={e=>refresh(page,totalPage)}>换一换</SearchInfoSwitch>
+                        <SearchInfoSwitch onClick={e=>refresh(page,totalPage,spin)}> 
+                        <span className='iconfont icon-spin base' ref={spin} ></span>换一换</SearchInfoSwitch>
                     </SearchInfoTitle>
                       <SearchList>
                           {

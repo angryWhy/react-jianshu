@@ -105,7 +105,7 @@ position: relative;
 .slide-exit-active{
     width: 160px;
 }
-.iconfont{
+.zoom{
     position: absolute;
     right: 0px;
     bottom: 5px;
@@ -124,7 +124,7 @@ export const SearchInfo=styled.div`
 position:absolute;
 width:220px;
 padding:0 20px;
-box-shadow:0 0 8px rgba(0,0,0, .2)
+box-shadow:0 0 8px rgba(0,0,0, .2);
 `
 export const SearchInfoTitle=styled.div`
 margin-top:20px;
@@ -137,6 +137,18 @@ font-size:12px;
 export const SearchInfoSwitch=styled.span`
 float:right;
 font-size:12px;
+.spin{
+    
+    transition: all .3s ease-in;
+    transform:rotate(180deg);
+    transform-origin: center center;
+}
+.base{
+    float:left;
+    display:block;
+    font-size:12px;
+    margin-right:2px;
+}
 `
 export const SearchInfoItem=styled.a`
 float:left;
