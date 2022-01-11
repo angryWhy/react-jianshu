@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-
+import { WritterWrap } from '../style'
 export default memo(function Writter() {
     return (
-        <div>
+        <WritterWrap>
             111111
-        </div>
+        </WritterWrap>
     )
 })

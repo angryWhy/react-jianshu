@@ -15,7 +15,7 @@ width:625px;
 }
 `
 export const HomeRight=styled.div`
-width:240px;
+width:280px;
 float:right;
 `
 export const TopicWrapper=styled.div`
@@ -67,4 +67,34 @@ float:right;
     line-height:18px;
     color:#999;
 }
+`
+export const RecommendWrapper=styled.div`
+margin:30px 0;
+width:280px;
+`
+export const RecommendItem=styled.div`
+width:280px;
+height:50px;
+background:url(${props=>props.imgUrl});
+background-size:contain;
+`
+export const WritterWrap=styled.div`
+width:278px;
+border:1px solid  #dcdcdc;
+border-radius:3px;
+height:300px;
+line-height:300px;
+text-align:center;
+background:red;
+`
+export const LoadMore=styled.div`
+width:100%;
+height:40px;
+line-height:40px;
+background:#a5a5a5;
+text-align:center;
+border-radius:20px;
+color:#fff;
+margin:30px 0;
+cursor:pointer;
 `

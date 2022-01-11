@@ -1,9 +1,14 @@
 import React, { memo } from 'react'
-import { ListInfo, ListItem } from '../style'
+import { ListInfo, ListItem,LoadMore } from '../style'
 import pic01 from "../../../assets/img/pic.jpg"
-import { useDispatch,useSelector,shallowEqual } from 'react-redux'
+import {useSelector,shallowEqual, useDispatch } from 'react-redux'
+import { getNewHomeList } from '../store/actionactors'
 export default memo(function List() {
-    const { recommend } = useSelector(state => ({ recommend: state.home.recommend }), shallowEqual)
+    const dispatch = useDispatch()
+    const { recommend,nextPage } = useSelector(state => ({ recommend: state.home.recommend,nextPage:state.home.nextPage }), shallowEqual)
+    function getMoreList(nextPage) {
+        dispatch(getNewHomeList(nextPage))
+    }
     return (
         <div>
             {
@@ -17,6 +22,7 @@ export default memo(function List() {
                     </ListItem>)
                 })
             }
+            <LoadMore onClick={e=>getMoreList(nextPage)}>更多文字</LoadMore>
         </div>
     )
 })
