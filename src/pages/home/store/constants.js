@@ -1,2 +1,4 @@
 export const GET_HOME_LIST="GET_TOPIC_LIST"
 export const MERGE_HOME_LIST="MERGE_HOME_LIST"
+export const SHOW_SCROLL="SHOW_SCROLL"
+export const NO_SHOW_SCROLL="NO_SHOW_SCROLL"

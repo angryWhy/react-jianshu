@@ -7,7 +7,7 @@ height: 56px;
 border-bottom:1px solid #f0f0f0 ;
 position:relative;
 `
-export const Logo=styled.a.attrs({href:"/"})`
+export const Logo=styled.a`
 position: absolute;
 top:0px;
 left:0px;

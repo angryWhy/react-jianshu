@@ -9,6 +9,12 @@ export const mergeHomeList=(res,nextPage)=>({
     res,
     nextPage
 })
+export const ShowScroll=()=>({
+    type:actionTypes.SHOW_SCROLL
+})
+export const noShowScroll=()=>({
+    type:actionTypes.NO_SHOW_SCROLL
+})
 export const getHomeList=(params)=>{
     return dispatch=>{
         axios.get("/api/home.json").then(res=>{

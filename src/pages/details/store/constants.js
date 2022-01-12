@@ -1,0 +1,1 @@
+export const GET_DESC_DATA="GET_DESC_DATA"

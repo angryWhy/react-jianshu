@@ -3,6 +3,7 @@ import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper,S
 import { CSSTransition } from 'react-transition-group'
 import { changeHeadNoSpread,changeHeadSpread,getList,showTbale,noShowTbale,changePage } from './store/actionactors'
 import { useDispatch,useSelector,shallowEqual } from 'react-redux'
+import { Link } from 'react-router-dom'
 export default memo(function Header() {
     const spin = useRef()
     const dispatch = useDispatch();
@@ -49,7 +50,9 @@ export default memo(function Header() {
     }, [headList])
     return (
         <HeaderWrapper>
-            <Logo/>
+            {/* <Link to="/"> */}
+            <Logo href='/'/>
+            {/* </Link> */}
             <Nav>
                 <NavItem className='left'>
                 <span className='iconfont icon-zhinanzhen'></span>
