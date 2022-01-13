@@ -2,12 +2,14 @@ import React, { memo, useEffect, useRef } from 'react'
 import { HeaderWrapper,Logo,Nav,NavItem,NavInput,Addition,Button,SearchWrapper,SearchInfo,SearchInfoTitle,SearchInfoSwitch,SearchInfoItem,SearchList } from './style'
 import { CSSTransition } from 'react-transition-group'
 import { changeHeadNoSpread,changeHeadSpread,getList,showTbale,noShowTbale,changePage } from './store/actionactors'
+import { changeLoginFalse } from '../../pages/login/store/actionactors'
 import { useDispatch,useSelector,shallowEqual } from 'react-redux'
 import { Link } from 'react-router-dom'
 export default memo(function Header() {
     const spin = useRef()
     const dispatch = useDispatch();
     const {isSpread,headList,mouseIn,page,totalPage} = useSelector(state=>({isSpread:state.head.isSpread,headList:state.head.headItemList,mouseIn:state.head.mouseIn,page:state.head.page,totalPage:state.head.totalPage}),shallowEqual)
+    const {login} = useSelector(state =>({login:state.login.login}),shallowEqual)
     function headShow(headList){
         headList.length===0&&dispatch(getList())
         dispatch(changeHeadSpread())
@@ -41,6 +43,9 @@ export default memo(function Header() {
         }
         return newList
     }
+    function exit() {
+        dispatch(changeLoginFalse())
+    }
     // function itemList(headList) {
         
     // }
@@ -66,7 +71,8 @@ export default memo(function Header() {
                     <span className='iconfont icon-11guanxi'></span>IT技术
                 </NavItem>
                 <NavItem className='right'>Aa</NavItem>
-                <NavItem className='right'>登陆</NavItem>
+                {login?<NavItem className='right' onClick={e=>exit()}>退出</NavItem>:
+                <Link to="/login"><NavItem className='right'>登陆</NavItem></Link>}
                 <SearchWrapper>
                     <CSSTransition in={isSpread} timeout={200} classNames="slide">
                 <NavInput className={isSpread? "focused":""} 
@@ -94,7 +100,7 @@ export default memo(function Header() {
                 </SearchWrapper>
             </Nav>
             <Addition>
-                <Button className='reg'><span className='wri'></span>写文章</Button>
+                <Link to="/write"><Button className='reg'><span className='wri'></span>写文章</Button></Link>
                 <Button className='writting'>注册</Button>
             </Addition>
         </HeaderWrapper>

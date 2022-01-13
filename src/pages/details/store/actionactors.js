@@ -4,10 +4,10 @@ export const getData=(res)=>({
     type:actionTypes.GET_DESC_DATA,
     res
 })
-export const getDescData=()=>{
+export const getDescData=(id)=>{
     return dispatch=>{
-        axios.get("/api/details.json").then(res=>{
-            console.log(res);
+        axios.get("/api/details.json?"+id).then(res=>{
+            console.log(id);
             dispatch(getData(res))
             console.log(res);
         })

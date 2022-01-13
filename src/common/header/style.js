@@ -2,7 +2,7 @@ import styled from "styled-components";
 import headLogo from "../../assets/img/head-logo.png"
 import yongyan from "../../assets/img/yongyan.png"
 export const HeaderWrapper=styled.div`
-
+z-index:1;
 height: 56px;
 border-bottom:1px solid #f0f0f0 ;
 position:relative;

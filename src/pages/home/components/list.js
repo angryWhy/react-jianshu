@@ -17,7 +17,7 @@ export default memo(function List() {
                     return (<ListItem key={index}>
                         <img className='pic' src={pic01} alt=""/>
                         <ListInfo>
-                            <Link  to={"/details/"+item.id}><h3 className='title'>{item.title}</h3></Link>
+                            <Link to={"/details/id="+item.id}><h3 className='title'>{item.title}</h3></Link>
                             <p className='desc'>{item.desc}</p>
                         </ListInfo>
                     </ListItem>)
